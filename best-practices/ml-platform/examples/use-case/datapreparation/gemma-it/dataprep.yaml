@@ -3,36 +3,37 @@ kind: Job
 metadata:
   name: dataprep-job
 spec:
+  backoffLimit: 0
   template:
     metadata:
       labels:
         app: dataprep-job
     spec:
-      serviceAccountName: KSA
+      serviceAccountName: default
       containers:
       - name: job
-        image: IMAGE_URL
+        image: us-docker.pkg.dev/gkebatchexpce3c8dcb/rueth-gpu-llm-finetuning/dataprep:v1.0.0
         imagePullPolicy: Always
         env:
         - name: "BUCKET"
-          value: "V_BUCKET"
+          value: "gkebatchexpce3c8dcb-rueth-gpu-flipkart-data"
         - name: "DATASET_INPUT_PATH"
-          value: "V_DATASET_INPUT_PATH"
+          value: "flipkart_preprocessed_dataset"
         - name: "DATASET_INPUT_FILE"
-          value: "V_DATASET_INPUT_FILE"
+          value: "flipkart.csv"
         - name: "DATASET_OUTPUT_PATH"
-          value: "V_DATASET_OUTPUT_PATH"
+          value: "dataset/output"
         - name: "PROJECT_ID"
-          value: "V_PROJECT_ID"
+          value: "gkebatchexpce3c8dcb"
         - name: "PROMPT_MODEL_ID"
-          value: "V_PROMPT_MODEL_ID"
+          value: "gemini-1.5-flash-001"
         - name: "REGION"
-          value: "V_REGION"
+          value: "us-central1"
         resources:
           requests:
-            cpu: "7"
-            memory: "25Gi"
+            cpu: 250m
+            memory: 512Mi
           limits:
-            cpu: "7"
-            memory: "25Gi"
+            cpu: 1
+            memory: 1Gi
       restartPolicy: Never
