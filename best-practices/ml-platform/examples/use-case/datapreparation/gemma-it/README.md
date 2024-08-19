@@ -115,7 +115,7 @@ the base model.
    kubectl apply -f dataprep.yaml -n ml-team
    ```
 
-1. Once the Job is completed, both the prepared datasets are stored in Google Cloud Storage.
+1. Once the Job is completed, the prepared datasets are stored in Google Cloud Storage.
 
    ```sh
    gcloud storage ls gs://${BUCKET}/${DATASET_OUTPUT_PATH}
